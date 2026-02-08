@@ -26,6 +26,12 @@ val subheadingsFontFamily: FontFamily
         Font(Resources.Font.GOOGLE_SANS_EXTRA_LIGHT, FontWeight.Bold),
     )
 
+val labelFontFamily: FontFamily
+    @Composable
+    get() = FontFamily(
+        Font(Resources.Font.ROBOTO_MONO_EXTRA_LIGHT, FontWeight.Bold),
+    )
+
 // Default Material 3 typography values
 val baseline = Typography()
 
@@ -95,12 +101,12 @@ val AppTypography: Typography
             lineHeight = 28.sp
         ),
         labelLarge = baseline.labelLarge.copy(
-            fontFamily = bodyFontFamily
+            fontFamily = labelFontFamily
         ),
         labelMedium = baseline.labelMedium.copy(
-            fontFamily = bodyFontFamily
+            fontFamily = labelFontFamily
         ),
         labelSmall = baseline.labelSmall.copy(
-            fontFamily = subheadingsFontFamily
+            fontFamily = labelFontFamily
         ),
     )

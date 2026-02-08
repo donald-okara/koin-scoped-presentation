@@ -1,4 +1,4 @@
-rootProject.name = "Ski"
+rootProject.name = "KoinScopedPresentation"
 enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
 pluginManagement {
@@ -27,10 +27,6 @@ dependencyResolutionManagement {
         mavenCentral()
     }
 }
-
-//plugins {
-//    id("org.gradle.toolchains.foojay-resolver-convention") version "1.0.0"
-//}
 
 includeBuild("build-logic")
 

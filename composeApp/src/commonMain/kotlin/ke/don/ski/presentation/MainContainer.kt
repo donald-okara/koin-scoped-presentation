@@ -180,12 +180,12 @@ fun MainContainer(
 
                 Column {
                     Text(
-                        "Ski",
+                        "Kotlin Kenya",
                         style = MaterialTheme.typography.titleLarge,
                         fontWeight = FontWeight.SemiBold
                     )
                     Text(
-                        if (mode == DeckMode.Presenter) "Presentation Demo" else "Presenter's panel (Do not present)",
+                        if (mode == DeckMode.Presenter) "Koin Scopes" else "Presenter's panel (Do not present)",
                         style = MaterialTheme.typography.bodySmall,
                         color = if (mode == DeckMode.Presenter) MaterialTheme.colorScheme.onSurfaceVariant else MaterialTheme.colorScheme.error
                     )
