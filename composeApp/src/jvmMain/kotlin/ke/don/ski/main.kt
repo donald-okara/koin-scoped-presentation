@@ -1,5 +1,7 @@
 package ke.don.ski
 
+import androidx.compose.ui.unit.DpSize
+import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Window
 import androidx.compose.ui.window.WindowPlacement
 import androidx.compose.ui.window.WindowState
@@ -17,12 +19,16 @@ import ke.don.ski.presentation.DeckMode
 fun main() = application {
     // Slides / Audience window
     val containerState = rememberContainerState()
-    val windowState = WindowState(
+    val audienceWindowState = WindowState(
         placement = WindowPlacement.Fullscreen
+    )
+    val notesWindowState = WindowState(
+        placement = WindowPlacement.Floating,
+        size = DpSize(1300.dp, 800.dp)
     )
     Window(
         onCloseRequest = ::exitApplication,
-        state = windowState,
+        state = audienceWindowState,
         title = "Slides"
     ) {
         Deck(
@@ -34,6 +40,7 @@ fun main() = application {
     // Presenter / Notes window
     Window(
         onCloseRequest = {}, // closing notes shouldn't kill slides
+        state = notesWindowState,
         title = "Presenter Notes"
     ) {
         Deck(

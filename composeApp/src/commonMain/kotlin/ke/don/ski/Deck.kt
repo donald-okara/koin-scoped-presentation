@@ -35,7 +35,7 @@ fun Deck(
     },
     mode: DeckMode = DeckMode.Local
 ) {
-    var darkMode by remember { mutableStateOf(false) }
+    var darkMode by remember { mutableStateOf(mode == DeckMode.Local) }
 
     AppTheme(
         darkTheme = darkMode,

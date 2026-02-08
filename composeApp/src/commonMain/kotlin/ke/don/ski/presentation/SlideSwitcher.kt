@@ -24,10 +24,7 @@ fun SlideSwitcher(
 ) {
     when (slide) {
         Slide.Introduction -> IntroductionScreen(modifier)
-        Slide.ExampleScreen -> ExampleSlide(modifier)
-        Slide.KodeViewer -> KodeViewerSlide(modifier)
-        Slide.VerticalSegmentsDemo -> VerticalSegmentsDemo(modifier)
-        Slide.HorizontalSegmentsDemo -> HorizontalSegmentsDemo(modifier)
+        else -> {}
     }
 }
 
@@ -45,7 +42,11 @@ fun slidesNotes(
         title = "Introduction",
         points = listOf(
             AnnotatedString("Remember to Mention your title"),
-            AnnotatedString("Keep the back story short")
+            AnnotatedString("Keep the back story short"),
+            AnnotatedString(""),
+            AnnotatedString(""),
+            AnnotatedString("This talk is about flows, not screens"),
+            AnnotatedString("The problem isn’t “how do I inject?” but “how long should this thing live?")
         )
     )
     else -> null

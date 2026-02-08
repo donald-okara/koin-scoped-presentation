@@ -13,26 +13,65 @@ sealed class Slide(
     @Serializable
     data object Introduction: Slide(
         label = "Introduction",
-        showHeader = true,
-        showFooter = true,
         isTitleScreen = true,
         transitionFromPrevious = ScreenTransition.Fade
     )
 
-    data object ExampleScreen: Slide(
-        label = "Example",
+    @Serializable
+    data object UserMentalModel: Slide(
+        label = "The User's Mental Model",
     )
 
-    data object KodeViewer: Slide(
-        label = "Kode Viewer",
+    data object DeveloperProblem: Slide(
+        label = "The Developer's Problem",
     )
 
-    data object HorizontalSegmentsDemo: Slide(
-        label = "Horizontal Segments Demo",
+    data object DeveloperObjective: Slide(
+        label = "What we actually need",
     )
 
-    data object VerticalSegmentsDemo: Slide(
-        label = "Vertical Segments Demo",
+    data object KoinScopesRecap: Slide(
+        label = "Koin Scopes Recap",
+    )
+
+    data object ModelingFlowAsScope: Slide(
+        label = "Modeling a Flow as a Scope",
+    )
+
+    data object WhatLivesInsideAScope: Slide(
+        label = "What lives inside a Scope",
+    )
+
+    data object ScopeLifeCycle: Slide(
+        label = "Why this composition works",
+    )
+
+    data object FlowBoundary: Slide(
+        label = "Creating the Flow Boundary",
+    )
+
+    data object NavigationIntegration: Slide(
+        label = "Navigation Integration",
+    )
+
+    data object EndingTheFlow: Slide(
+        label = "Ending the flow",
+    )
+
+    data object PassingDownTheScope: Slide(
+        label = "Passing Down the Scope",
+    )
+
+    data object ResultingBehaviours: Slide(
+        label = "Resulting Behaviour",
+    )
+
+    data object WhenToUseScopes: Slide(
+        label = "When To Use Scopes"
+    )
+
+    data object Conclusion: Slide(
+        label = "Conclusion"
     )
 
     fun index(): Int {
@@ -43,10 +82,20 @@ sealed class Slide(
         fun getScreens(): List<Slide> =
             listOf(
                 Introduction,
-                ExampleScreen,
-                KodeViewer,
-                VerticalSegmentsDemo,
-                HorizontalSegmentsDemo
+                UserMentalModel,
+                DeveloperProblem,
+                DeveloperObjective,
+                KoinScopesRecap,
+                ModelingFlowAsScope,
+                WhatLivesInsideAScope,
+                ScopeLifeCycle,
+                FlowBoundary,
+                NavigationIntegration,
+                EndingTheFlow,
+                PassingDownTheScope,
+                ResultingBehaviours,
+                WhenToUseScopes,
+                Conclusion
             )
     }
 }
