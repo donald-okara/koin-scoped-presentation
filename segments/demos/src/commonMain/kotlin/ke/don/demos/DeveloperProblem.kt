@@ -23,12 +23,11 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import ke.don.demos.components.WordedList
-import ke.don.domain.Slide
 import kotlinx.coroutines.delay
 
 @OptIn(ExperimentalMaterial3ExpressiveApi::class)
 @Composable
-fun UserMentalModelSlide(
+fun DeveloperProblemComponent(
     modifier: Modifier = Modifier,
 ) {
     var listIsVisible by remember { mutableStateOf(false) }
@@ -49,7 +48,7 @@ fun UserMentalModelSlide(
         horizontalAlignment = Alignment.Start
     ) {
         Text(
-            "What the user expects",
+            "The Developer's Problem",
             style = MaterialTheme.typography.headlineSmallEmphasized,
             fontWeight = FontWeight.Bold,
             textAlign = TextAlign.Start
@@ -61,23 +60,19 @@ fun UserMentalModelSlide(
             WordedList(
                 points = listOf(
                     AnnotatedString(
-                        " \"I browse the products\"",
+                        " \"Shared ViewModels grow uncontrollably\"",
                         spanStyle = SpanStyle(fontStyle = FontStyle.Italic)
                     ),
                     AnnotatedString(
-                        " \"Mmmh, cool scarf, add to cart\"",
+                        " \"APIs refetch unnecessarily\"",
                         spanStyle = SpanStyle(fontStyle = FontStyle.Italic)
                     ),
                     AnnotatedString(
-                        " \"Okay these are enough things, move to checkout\"",
+                        " \"State outlives its usefulness\"",
                         spanStyle = SpanStyle(fontStyle = FontStyle.Italic)
                     ),
                     AnnotatedString(
-                        " \"Yep. This cart looks good, proceed to make payment\"",
-                        spanStyle = SpanStyle(fontStyle = FontStyle.Italic)
-                    ),
-                    AnnotatedString(
-                        " \"Gets receipt with a list of what i ordered\"",
+                        " \"The 1,000-line ViewModel problem\"",
                         spanStyle = SpanStyle(fontStyle = FontStyle.Italic)
                     ),
                 )

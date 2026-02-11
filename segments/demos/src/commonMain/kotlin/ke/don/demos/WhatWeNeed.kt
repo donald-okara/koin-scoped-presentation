@@ -23,12 +23,11 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import ke.don.demos.components.WordedList
-import ke.don.domain.Slide
 import kotlinx.coroutines.delay
 
 @OptIn(ExperimentalMaterial3ExpressiveApi::class)
 @Composable
-fun UserMentalModelSlide(
+fun WhatWeNeedComponent(
     modifier: Modifier = Modifier,
 ) {
     var listIsVisible by remember { mutableStateOf(false) }
@@ -49,10 +48,15 @@ fun UserMentalModelSlide(
         horizontalAlignment = Alignment.Start
     ) {
         Text(
-            "What the user expects",
+            "Let's set some objectives",
             style = MaterialTheme.typography.headlineSmallEmphasized,
             fontWeight = FontWeight.Bold,
             textAlign = TextAlign.Start
+        )
+
+        Text(
+            "We want state that is:",
+            style = MaterialTheme.typography.titleSmall
         )
 
         AnimatedVisibility(
@@ -61,23 +65,23 @@ fun UserMentalModelSlide(
             WordedList(
                 points = listOf(
                     AnnotatedString(
-                        " \"I browse the products\"",
+                        "Shared across multiple screens",
                         spanStyle = SpanStyle(fontStyle = FontStyle.Italic)
                     ),
                     AnnotatedString(
-                        " \"Mmmh, cool scarf, add to cart\"",
+                        "Alive for one flow",
                         spanStyle = SpanStyle(fontStyle = FontStyle.Italic)
                     ),
                     AnnotatedString(
-                        " \"Okay these are enough things, move to checkout\"",
+                        "Destroyed automatically when the flow ends",
                         spanStyle = SpanStyle(fontStyle = FontStyle.Italic)
                     ),
                     AnnotatedString(
-                        " \"Yep. This cart looks good, proceed to make payment\"",
+                        "Yep. This cart looks good, proceed to make payment",
                         spanStyle = SpanStyle(fontStyle = FontStyle.Italic)
                     ),
                     AnnotatedString(
-                        " \"Gets receipt with a list of what i ordered\"",
+                        "Gets receipt with a list of what i ordered",
                         spanStyle = SpanStyle(fontStyle = FontStyle.Italic)
                     ),
                 )

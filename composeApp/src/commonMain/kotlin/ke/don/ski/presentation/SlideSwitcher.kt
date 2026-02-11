@@ -4,11 +4,15 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.AnnotatedString
 import io.github.donald_okara.components.guides.notes.Notes
+import ke.don.demos.AnimatedFlowExample
+import ke.don.demos.DeveloperProblemComponent
 import ke.don.demos.ExampleSlide
 import ke.don.demos.HorizontalSegmentsDemo
 import ke.don.demos.KodeViewerSlide
+import ke.don.demos.KoinScopesRecapComponent
 import ke.don.demos.UserMentalModelSlide
 import ke.don.demos.VerticalSegmentsDemo
+import ke.don.demos.WhatWeNeedComponent
 import ke.don.domain.Slide
 import ke.don.introduction.IntroductionScreen
 
@@ -26,6 +30,10 @@ fun SlideSwitcher(
     when (slide) {
         Slide.Introduction -> IntroductionScreen(modifier)
         Slide.UserMentalModel -> UserMentalModelSlide(modifier)
+        Slide.DeveloperProblem -> DeveloperProblemComponent(modifier)
+        Slide.DeveloperObjective -> WhatWeNeedComponent(modifier)
+        Slide.KoinScopesRecap -> KoinScopesRecapComponent(modifier)
+
         else -> {}
     }
 }
@@ -57,6 +65,13 @@ fun slidesNotes(
             AnnotatedString("Users never think about state lifetimes"),
             AnnotatedString("They expect continuity without leakage"),
             AnnotatedString("Losing cart data = broken trust")
+        )
+    )
+    Slide.DeveloperProblem -> Notes(
+        title = "Developer Problem",
+        points = listOf(
+            AnnotatedString("This is where “just put it in the ViewModel” fails"),
+            AnnotatedString("Especially obvious in multi-step flows"),
         )
     )
     else -> null

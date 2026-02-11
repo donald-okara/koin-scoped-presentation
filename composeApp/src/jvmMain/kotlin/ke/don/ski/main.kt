@@ -28,7 +28,7 @@ fun main() = application {
     )
 
     // Remember to enable when presenting
-    val doubleLaunch = false
+    val doubleLaunch = true
 
     if (doubleLaunch) {
         Window(

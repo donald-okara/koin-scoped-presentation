@@ -40,7 +40,7 @@ fun IntroductionScreen(
         TextSegment(
             title = "Scoped Dependencies in Koin",
             presenter = "Donald Isoe",
-            organisation = "Terra softworks LTD",
+            organisation = "Terra Softworks LTD",
             occupation = "Android Engineer"
         )
 
