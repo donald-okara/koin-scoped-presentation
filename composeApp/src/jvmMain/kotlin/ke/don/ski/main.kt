@@ -26,15 +26,21 @@ fun main() = application {
         placement = WindowPlacement.Floating,
         size = DpSize(1300.dp, 800.dp)
     )
-    Window(
-        onCloseRequest = ::exitApplication,
-        state = audienceWindowState,
-        title = "Slides"
-    ) {
-        Deck(
-            containerState = containerState,
-            mode = DeckMode.Presenter
-        )
+
+    // Remember to enable when presenting
+    val doubleLaunch = false
+
+    if (doubleLaunch) {
+        Window(
+            onCloseRequest = ::exitApplication,
+            state = audienceWindowState,
+            title = "Slides"
+        ) {
+            Deck(
+                containerState = containerState,
+                mode = DeckMode.Presenter
+            )
+        }
     }
 
     // Presenter / Notes window

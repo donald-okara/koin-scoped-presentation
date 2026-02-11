@@ -1,0 +1,87 @@
+package ke.don.demos
+
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxHeight
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.AnnotatedString
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.font.FontStyle
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.dp
+import ke.don.demos.components.WordedList
+import ke.don.domain.Slide
+import kotlinx.coroutines.delay
+
+@OptIn(ExperimentalMaterial3ExpressiveApi::class)
+@Composable
+fun UserMentalModelSlide(
+    modifier: Modifier = Modifier,
+) {
+    var listIsVisible by remember { mutableStateOf(false) }
+
+    LaunchedEffect(Unit){
+        delay(3_000)
+        listIsVisible = true
+    }
+
+    Column(
+        modifier = modifier
+            .fillMaxHeight()
+            .fillMaxWidth(0.6f),
+        verticalArrangement = Arrangement.spacedBy(
+            16.dp,
+            Alignment.CenterVertically
+        ),
+        horizontalAlignment = Alignment.Start
+    ) {
+        Text(
+            "What the user expects",
+            style = MaterialTheme.typography.headlineSmallEmphasized,
+            fontWeight = FontWeight.Bold,
+            textAlign = TextAlign.Start
+        )
+
+        AnimatedVisibility(
+            visible = listIsVisible
+        ){
+            WordedList(
+                points = listOf(
+                    AnnotatedString(
+                        " \"I browse the products\"",
+                        spanStyle = SpanStyle(fontStyle = FontStyle.Italic)
+                    ),
+                    AnnotatedString(
+                        " \"Mmmh, cool scarf, add to cart\"",
+                        spanStyle = SpanStyle(fontStyle = FontStyle.Italic)
+                    ),
+                    AnnotatedString(
+                        " \"Okay these are enough things, move to checkout\"",
+                        spanStyle = SpanStyle(fontStyle = FontStyle.Italic)
+                    ),
+                    AnnotatedString(
+                        " \"Yep. This cart looks good, proceed to make payment\"",
+                        spanStyle = SpanStyle(fontStyle = FontStyle.Italic)
+                    ),
+                    AnnotatedString(
+                        " \"Gets receipt with a list of what i ordered\"",
+                        spanStyle = SpanStyle(fontStyle = FontStyle.Italic)
+                    ),
+                )
+            )
+        }
+    }
+}

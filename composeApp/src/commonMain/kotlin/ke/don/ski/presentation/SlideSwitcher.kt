@@ -7,6 +7,7 @@ import io.github.donald_okara.components.guides.notes.Notes
 import ke.don.demos.ExampleSlide
 import ke.don.demos.HorizontalSegmentsDemo
 import ke.don.demos.KodeViewerSlide
+import ke.don.demos.UserMentalModelSlide
 import ke.don.demos.VerticalSegmentsDemo
 import ke.don.domain.Slide
 import ke.don.introduction.IntroductionScreen
@@ -24,6 +25,7 @@ fun SlideSwitcher(
 ) {
     when (slide) {
         Slide.Introduction -> IntroductionScreen(modifier)
+        Slide.UserMentalModel -> UserMentalModelSlide(modifier)
         else -> {}
     }
 }
@@ -47,6 +49,14 @@ fun slidesNotes(
             AnnotatedString(""),
             AnnotatedString("This talk is about flows, not screens"),
             AnnotatedString("The problem isn’t “how do I inject?” but “how long should this thing live?")
+        )
+    )
+    Slide.UserMentalModel -> Notes(
+        title = "User Mental Model",
+        points = listOf(
+            AnnotatedString("Users never think about state lifetimes"),
+            AnnotatedString("They expect continuity without leakage"),
+            AnnotatedString("Losing cart data = broken trust")
         )
     )
     else -> null
