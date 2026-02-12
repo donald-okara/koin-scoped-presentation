@@ -22,11 +22,17 @@ fun highlightKotlin(
     val stringPattern = "\".*?\"".toRegex()
     val commentPattern = "//.*|/\\*(.|\\n|\\r)*?\\*/".toRegex()
     val annotationPattern = "@[A-Za-z0-9_]+".toRegex()
+    val operatorPattern = "[<>!=+\\-*/%&|^~?:]+".toRegex()
+    val angleBracketPattern = "[<>]".toRegex()
+    val angleBracketGroupPattern = "<[^>]+>".toRegex()
 
     val matches = buildList {
         addAll(stringPattern.findAll(code))
         addAll(commentPattern.findAll(code))
         addAll(annotationPattern.findAll(code))
+        addAll(angleBracketPattern.findAll(code))
+        addAll(angleBracketGroupPattern.findAll(code))
+        addAll(operatorPattern.findAll(code))
         addAll(keywordPattern.findAll(code))
         addAll(typePattern.findAll(code))
     }.sortedBy { it.range.first }
@@ -49,6 +55,8 @@ fun highlightKotlin(
             stringPattern.matches(match.value) -> theme.string
             annotationPattern.matches(match.value) -> theme.annotation
             keywordPattern.matches(match.value) -> theme.keyword
+            angleBracketPattern.matches(match.value) -> theme.operator
+            operatorPattern.matches(match.value) -> theme.operator
             typePattern.matches(match.value) -> theme.type
             else -> theme.normal
         }

@@ -14,6 +14,7 @@ data class CodeTheme(
     val string: Color,
     val comment: Color,
     val annotation: Color,
+    val operator: Color,   // <- added
 )
 
 object CodeThemes {
@@ -26,6 +27,7 @@ object CodeThemes {
         string = Color(0xFFD69D85),
         comment = Color(0xFF6A9955),
         annotation = Color(0xFFDCDCAA),
+        operator = Color(0xFFA9B7C6),  // neutral gray
     )
 
     val Light = CodeTheme(
@@ -36,6 +38,7 @@ object CodeThemes {
         string = Color(0xFFA31515),
         comment = Color(0xFF008000),
         annotation = Color(0xFF795E26),
+        operator = Color(0xFF000000), // slightly stronger for clarity
     )
 }
 
@@ -49,5 +52,6 @@ fun animateCodeTheme(target: CodeTheme): CodeTheme {
         string = animateColorAsState(target.string, label = "string").value,
         comment = animateColorAsState(target.comment, label = "comment").value,
         annotation = animateColorAsState(target.annotation, label = "annotation").value,
+        operator = animateColorAsState(target.operator, label = "operator").value,
     )
 }
