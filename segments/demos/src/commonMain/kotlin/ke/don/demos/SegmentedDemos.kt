@@ -32,7 +32,7 @@ fun VerticalSegmentsDemo(
         initialSegments = segments,
     )
 }
-val segments = listOf(
+private val segments = listOf(
     1f to @Composable { SegmentItem(index = 1) },
     1f to @Composable { SegmentItem(index = 2) },
     1f to @Composable { SegmentItem(index = 3) },

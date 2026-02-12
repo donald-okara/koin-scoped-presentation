@@ -44,6 +44,8 @@ import io.github.donald_okara.components.icon.IconButtonToken
 fun FocusKotlinViewer(
     modifier: Modifier = Modifier,
     onDismiss: () -> Unit,
+    title: String = "Preview",
+    initialScale: Float = 0.75f,
     darkTheme: Boolean,
     toggleTheme: () -> Unit,
     code: () -> String
@@ -53,7 +55,7 @@ fun FocusKotlinViewer(
     val minScale = 0.75f
     val maxScale = 1.75f
 
-    var textScale by rememberSaveable { mutableStateOf(1f) }
+    var textScale by rememberSaveable { mutableStateOf(initialScale) }
     val animatedScale by animateFloatAsState(
         targetValue = textScale,
         label = "text-scale"
@@ -91,7 +93,7 @@ fun FocusKotlinViewer(
                 /* --- top bar --- */
 
                 TopAppBar(
-                    title = { Text("Preview") },
+                    title = { Text(title) },
                     colors = TopAppBarDefaults.topAppBarColors(
                         containerColor = colorScheme.background,
                         titleContentColor = colorScheme.normal,

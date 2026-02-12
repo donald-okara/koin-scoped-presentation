@@ -38,12 +38,17 @@ sealed class Slide(
         label = "Modeling a Flow as a Scope",
     )
 
-    data object WhatLivesInsideAScope: Slide(
-        label = "What lives inside a Scope",
+    data object ModelingFlowAsScope2: Slide(
+        label = "Modeling a Flow as a Scope: part 2",
+    )
+    data object WhatMakesAGoodScope: Slide(
+        label = "What makes a good Scope",
     )
 
+
+
     data object ScopeLifeCycle: Slide(
-        label = "Why this composition works",
+        label = "Scope Lifecycle",
     )
 
     data object FlowBoundary: Slide(
@@ -87,7 +92,8 @@ sealed class Slide(
                 DeveloperObjective,
                 KoinScopesRecap,
                 ModelingFlowAsScope,
-                WhatLivesInsideAScope,
+                ModelingFlowAsScope2,
+                WhatMakesAGoodScope,
                 ScopeLifeCycle,
                 FlowBoundary,
                 NavigationIntegration,

@@ -36,6 +36,7 @@ import io.github.donald_okara.components.icon.IconButtonToken
 fun KotlinCodeViewerCard(
     modifier: Modifier = Modifier,
     darkTheme: Boolean = true,
+    initiallyFolded: Boolean = false,
     toggleFocus: () -> Unit = {},
     toggleTheme: () -> Unit = {},
     code: () -> String
@@ -48,7 +49,7 @@ fun KotlinCodeViewerCard(
 
     val colorScheme = animateCodeTheme(targetTheme)
 
-    var foldLambdas by rememberSaveable { mutableStateOf(false) }
+    var foldLambdas by rememberSaveable { mutableStateOf(initiallyFolded) }
 
     val source = remember { code() }
 

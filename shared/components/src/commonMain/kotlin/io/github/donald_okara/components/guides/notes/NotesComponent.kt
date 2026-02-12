@@ -14,6 +14,7 @@ import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.text.selection.SelectionContainer
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Lightbulb
 import androidx.compose.material3.Divider
@@ -114,10 +115,12 @@ private fun NoteBullet(text: AnnotatedString) {
                 .background(MaterialTheme.colorScheme.primary)
         )
 
-        Text(
-            text = text,
-            style = MaterialTheme.typography.bodyMedium,
-        )
+        SelectionContainer{
+            Text(
+                text = text,
+                style = MaterialTheme.typography.bodyMedium,
+            )
+        }
     }
 }
 
