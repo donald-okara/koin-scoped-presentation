@@ -16,6 +16,8 @@ import ke.don.demos.KodeViewerSlide
 import ke.don.demos.KoinScopesRecapComponent
 import ke.don.demos.ModellingFlowComponent
 import ke.don.demos.ModellingFlowComponent2
+import ke.don.demos.ScopeInNavigation
+import ke.don.demos.ScopeInScreen
 import ke.don.demos.ScopeLifeCycleComponent
 import ke.don.demos.UserMentalModelSlide
 import ke.don.demos.VerticalSegmentsDemo
@@ -45,6 +47,8 @@ fun SlideSwitcher(
         Slide.ModelingFlowAsScope2 -> ModellingFlowComponent2(modifier)
         Slide.ScopeLifeCycle -> ScopeLifeCycleComponent(modifier)
         Slide.WhatMakesAGoodScope -> WhatMakesAGoodScopeComponent(modifier)
+        Slide.NavigationIntegration -> ScopeInNavigation(modifier)
+        Slide.PassingDownTheScope -> ScopeInScreen(modifier)
         else -> {}
     }
 }

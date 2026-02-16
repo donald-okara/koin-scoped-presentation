@@ -57,7 +57,6 @@ fun ScopeLifeCycleComponent(
             initialSegments = segments,
         )
     }
-
 }
 
 private val segments = listOf(
@@ -90,7 +89,7 @@ private fun CodeSegment(
     """.trimIndent()
 
     KotlinCodeViewerCard(
-        modifier = Modifier.fillMaxSize(),
+        modifier = modifier.fillMaxSize(),
         darkTheme = isCardDark,
         initiallyFolded = false,
         toggleFocus = { isFocused = !isFocused },

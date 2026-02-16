@@ -56,11 +56,7 @@ sealed class Slide(
     )
 
     data object NavigationIntegration: Slide(
-        label = "Navigation Integration",
-    )
-
-    data object EndingTheFlow: Slide(
-        label = "Ending the flow",
+        label = "Using it in Compose",
     )
 
     data object PassingDownTheScope: Slide(
@@ -95,9 +91,8 @@ sealed class Slide(
                 ModelingFlowAsScope2,
                 WhatMakesAGoodScope,
                 ScopeLifeCycle,
-                FlowBoundary,
+                //FlowBoundary,
                 NavigationIntegration,
-                EndingTheFlow,
                 PassingDownTheScope,
                 ResultingBehaviours,
                 WhenToUseScopes,
