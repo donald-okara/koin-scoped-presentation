@@ -81,11 +81,13 @@ private fun CodeSegment(
     }
 
     val code = """
-        scope<CheckoutScope> {
-            scopedOf(::CartManager)
-            scopedOf(::PaymentManager)
-            scopedOf(::ReceiptManager)
-        }
+val scopeModule = module {
+    scope<CheckoutScope> {
+        scopedOf(::CartManager)
+        scopedOf(::PaymentManager)
+        scopedOf(::ReceiptManager)
+    }
+}
     """.trimIndent()
 
     KotlinCodeViewerCard(

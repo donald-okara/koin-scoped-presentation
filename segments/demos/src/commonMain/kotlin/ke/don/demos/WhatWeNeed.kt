@@ -75,15 +75,7 @@ fun WhatWeNeedComponent(
                     AnnotatedString(
                         "Destroyed automatically when the flow ends",
                         spanStyle = SpanStyle(fontStyle = FontStyle.Italic)
-                    ),
-                    AnnotatedString(
-                        "Yep. This cart looks good, proceed to make payment",
-                        spanStyle = SpanStyle(fontStyle = FontStyle.Italic)
-                    ),
-                    AnnotatedString(
-                        "Gets receipt with a list of what i ordered",
-                        spanStyle = SpanStyle(fontStyle = FontStyle.Italic)
-                    ),
+                    )
                 )
             )
         }

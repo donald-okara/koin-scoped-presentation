@@ -110,9 +110,14 @@ fun MainContainer(
                 Box(
                     modifier = Modifier
                         .size(8.dp)
+                        .clip(CircleShape)
                         .background(
-                            MaterialTheme.colorScheme.primary,
-                            CircleShape
+                            brush = Brush.verticalGradient(
+                                colors = listOf(
+                                    Color(0xFFFF6E40),
+                                    MaterialTheme.colorScheme.primary,
+                                )
+                            )
                         )
                 )
 

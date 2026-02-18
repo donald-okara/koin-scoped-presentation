@@ -189,11 +189,8 @@ object CheckoutFlow : Screen {
         Navigator(
             screen = CartScreen(scope.scope.id),
         ){ navigator ->
-            AnimatedContent(
-                targetState = navigator.lastItem,
-                transitionSpec = {...}
-                // Implement your own animation
-            ) { screen ->
+            // Implement your own animation
+            AnimatedContent(...) { screen ->
                 screen.Content()
             }
         }

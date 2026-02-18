@@ -33,6 +33,7 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import io.github.donald_okara.components.layout.HorizontallySegmentedScreen
 import io.github.donald_okara.components.values.Values
@@ -85,6 +86,11 @@ fun SocialColumn(
             label = "Medium",
             url = "medium.com/@donaldokara123"
         )
+
+        SocialBlock(
+            label = "Further Reading",
+            url = "medium.com/@donaldokara123/scoped-dependencies-in-koin-managing-flow-lifecycles-the-smart-way-99235728c7db"
+        )
     }
 }
 
@@ -128,6 +134,8 @@ private fun SocialBlock(
                 text = url,
                 style = MaterialTheme.typography.bodySmall,
                 fontWeight = FontWeight.Medium,
+                maxLines = 2,
+                overflow = TextOverflow.Ellipsis,
                 color = MaterialTheme.colorScheme.onSurface
             )
         }

@@ -16,6 +16,8 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
@@ -36,8 +38,14 @@ fun WhatMakesAGoodScopeComponent(
 
     val pointStyle = SpanStyle(
         fontWeight = FontWeight.Bold,
-        color = MaterialTheme.colorScheme.primary
+        brush = Brush.verticalGradient(
+            colors = listOf(
+                Color(0xFFFF6E40),
+                MaterialTheme.colorScheme.primary
+            )
+        )
     )
+
 
     LaunchedEffect(Unit){
         delay(500)
