@@ -1,5 +1,11 @@
 package ke.don.demos
 
+import androidx.compose.animation.core.LinearEasing
+import androidx.compose.animation.core.RepeatMode
+import androidx.compose.animation.core.animateFloat
+import androidx.compose.animation.core.infiniteRepeatable
+import androidx.compose.animation.core.rememberInfiniteTransition
+import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -23,6 +29,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
@@ -154,18 +161,7 @@ fun AnyQuestionsPicture(
         tonalElevation = 8.dp,
         shadowElevation = 16.dp,
     ) {
-        Box(
-            modifier = Modifier
-                .fillMaxSize()
-                .background(
-                    brush = Brush.verticalGradient(
-                        colors = listOf(
-                            Color(0xFFFF6E40),
-                            MaterialTheme.colorScheme.primary,
-                        )
-                    )
-                )
-        ){
+        AnimatedGradientBackground{
             Image(
                 painter = painterResource(Resources.Images.DAVID_S_PUMPKINS),
                 contentDescription = null,
@@ -175,6 +171,41 @@ fun AnyQuestionsPicture(
                     .padding(32.dp)
             )
         }
+    }
+}
 
+@Composable
+fun AnimatedGradientBackground(
+    modifier: Modifier = Modifier,
+    content: @Composable () -> Unit,
+) {
+    // Infinite transition
+    val transition = rememberInfiniteTransition()
+
+    // Animate the gradient offset
+    val offset by transition.animateFloat(
+        initialValue = 0f,
+        targetValue = 1f,
+        animationSpec = infiniteRepeatable(
+            animation = tween(durationMillis = 3_000, easing = LinearEasing),
+            repeatMode = RepeatMode.Reverse
+        )
+    )
+
+    Box(
+        modifier = modifier
+            .fillMaxSize()
+            .background(
+                brush = Brush.verticalGradient(
+                    colors = listOf(
+                        Color(0xFFFF6E40),
+                        MaterialTheme.colorScheme.primary
+                    ),
+                    startY = 0f + offset * 1000f,   // animate startY
+                    endY = 1000f + offset * 1000f  // animate endY
+                )
+            )
+    ){
+        content()
     }
 }

@@ -78,7 +78,7 @@ private fun BreakdownSegment(
 
     val fetchScopeCode = """
         val koin = getKoin()
-        val scope = remember { koin.getScope(scopeID) } 
+        val scope = remember{ koin.getScope(scopeID) } 
         val cartManager: CartManager = scope.get() 
         // This is how we resolve a class in scope 
 
