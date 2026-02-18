@@ -80,6 +80,11 @@ fun SocialColumn(
         )
 
         SocialBlock(
+            label = "Demo Project",
+            url = "github.com/donald-okara/ScopeExampl"
+        )
+
+        SocialBlock(
             label = "Twitter",
             url = "x.com/don_okara"
         )
