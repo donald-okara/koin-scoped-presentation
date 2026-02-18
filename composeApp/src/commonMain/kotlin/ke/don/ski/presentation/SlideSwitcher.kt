@@ -9,6 +9,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.withStyle
 import io.github.donald_okara.components.guides.notes.Notes
 import ke.don.demos.AnimatedFlowExample
+import ke.don.demos.ConclusionSlide
 import ke.don.demos.DeveloperProblemComponent
 import ke.don.demos.ExampleSlide
 import ke.don.demos.HorizontalSegmentsDemo
@@ -23,6 +24,7 @@ import ke.don.demos.UserMentalModelSlide
 import ke.don.demos.VerticalSegmentsDemo
 import ke.don.demos.WhatMakesAGoodScopeComponent
 import ke.don.demos.WhatWeNeedComponent
+import ke.don.demos.WhenToUseScopesComponent
 import ke.don.domain.Slide
 import ke.don.introduction.IntroductionScreen
 
@@ -49,6 +51,8 @@ fun SlideSwitcher(
         Slide.WhatMakesAGoodScope -> WhatMakesAGoodScopeComponent(modifier)
         Slide.NavigationIntegration -> ScopeInNavigation(modifier)
         Slide.PassingDownTheScope -> ScopeInScreen(modifier)
+        Slide.WhenToUseScopes -> WhenToUseScopesComponent(modifier)
+        Slide.Conclusion -> ConclusionSlide(modifier)
         else -> {}
     }
 }

@@ -29,6 +29,9 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.LookaheadScope
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -170,9 +173,14 @@ fun MainContainer(
                     modifier = Modifier
                         .width(4.dp)
                         .height(40.dp)
+                        .clip(RoundedCornerShape(2.dp))
                         .background(
-                            MaterialTheme.colorScheme.primary,
-                            RoundedCornerShape(2.dp)
+                            brush = Brush.verticalGradient(
+                                colors = listOf(
+                                    MaterialTheme.colorScheme.primary,
+                                    Color(0xFFFF6E40)
+                                )
+                            )
                         )
                 )
 

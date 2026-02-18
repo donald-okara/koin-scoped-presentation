@@ -213,6 +213,104 @@ fun ExpressiveFrameClipped(
     }
 }
 
+@OptIn(ExperimentalMaterial3ExpressiveApi::class)
+@Composable
+fun ExpressiveFrameClipped(
+    modifier: Modifier = Modifier,
+    polygon: RoundedPolygon = frameShapes.random(),
+    startColor: Color = MaterialTheme.colorScheme.primary,
+    endColor: Color = Color(0xFFFF6E40),
+    sizeDp: Int,
+    index: Int = 0,
+    imageOffset: Int = -10,
+    floating: Boolean = false,
+    brushType: BrushType = BrushType.SWEEP,
+    content: @Composable () -> Unit,
+) {
+    val shape = polygon.toShape()
+    val density = LocalDensity.current
+    val imageOffsetPx = with(density) { imageOffset.dp.toPx() }
+
+    val animatedStartColor by animateColorAsState(
+        targetValue = startColor, animationSpec = tween(500), label = "FrameColor"
+    )
+    val animatedEndColor by animateColorAsState(
+        targetValue = endColor, animationSpec = tween(500), label = "FrameColor"
+    )
+
+    val brushColors = listOf(
+        animatedStartColor, animatedEndColor
+    )
+
+    val brush = remember(brushType, brushColors) {
+        when (brushType) {
+            BrushType.LINEAR -> Brush.linearGradient(brushColors)
+            BrushType.SWEEP -> Brush.sweepGradient(brushColors)
+            BrushType.RADIAL -> Brush.radialGradient(brushColors)
+            BrushType.VERTICAL -> Brush.verticalGradient(brushColors)
+            BrushType.HORIZONTAL -> Brush.horizontalGradient(brushColors)
+        }
+    }
+
+    val (offsetX, offsetY) = randomFloatingOffset(seed = index, (sizeDp / 4).toFloat())
+
+    Box(
+        modifier = modifier.size(sizeDp.dp).then(if (floating) Modifier.offset {
+            IntOffset(offsetX.roundToInt(), offsetY.roundToInt())
+        }
+        else Modifier)) {
+        // Background frame
+        Box(
+            Modifier.clip(shape).matchParentSize().drawBehind {
+                drawRoundRect(
+                    brush = brush, size = size, cornerRadius = CornerRadius(16.dp.toPx())
+                )
+            })
+
+        // Image (drawn ONCE)
+        Box(
+            modifier = Modifier.matchParentSize().expressiveImageClip(
+                shape = shape, imageOffsetPx = imageOffsetPx
+            )
+        ) {
+            content()
+        }
+    }
+}
+
+
+@Composable
+fun ExpressivePictureFrame(
+    modifier: Modifier = Modifier,
+    polygon: RoundedPolygon = frameShapes.random(),
+    startColor: Color = MaterialTheme.colorScheme.primary,
+    endColor: Color = Color(0xFFFF6E40),
+    sizeDp: Int = 200,
+    index: Int = 0,
+    imageOffset: Int = -10,
+    floating: Boolean = true,
+    brushType: BrushType = BrushType.SWEEP,
+    image: DrawableResource,
+) {
+    ExpressiveFrameClipped(
+        modifier = modifier,
+        polygon = polygon,
+        brushType = brushType,
+        index = index,
+        startColor = startColor,
+        endColor = endColor,
+        sizeDp = sizeDp,
+        imageOffset = imageOffset,
+        floating = floating
+    ) {
+        Image(
+            painter = painterResource(image),
+            contentDescription = null,
+            contentScale = ContentScale.Crop,
+            modifier = Modifier.size((sizeDp).dp)
+        )
+    }
+}
 
 @Composable
 fun ExpressivePictureFrame(

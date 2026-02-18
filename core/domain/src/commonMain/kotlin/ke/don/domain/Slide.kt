@@ -72,7 +72,8 @@ sealed class Slide(
     )
 
     data object Conclusion: Slide(
-        label = "Conclusion"
+        transitionFromPrevious = ScreenTransition.Vertical,
+        label = "The End"
     )
 
     fun index(): Int {
@@ -94,7 +95,7 @@ sealed class Slide(
                 //FlowBoundary,
                 NavigationIntegration,
                 PassingDownTheScope,
-                ResultingBehaviours,
+                //ResultingBehaviours,
                 WhenToUseScopes,
                 Conclusion
             )

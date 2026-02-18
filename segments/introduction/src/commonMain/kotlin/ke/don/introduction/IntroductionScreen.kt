@@ -17,6 +17,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -65,7 +66,8 @@ private fun ImageSegment(
             image = painter,
             sizeDp = 400,
             polygon = MaterialShapes.Clover4Leaf,
-            backgroundColor = MaterialTheme.colorScheme.primary,
+            startColor = MaterialTheme.colorScheme.primary,
+            endColor = Color(0xFFFF6E40),
             brushType = BrushType.SWEEP
         )
     }

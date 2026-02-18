@@ -22,5 +22,6 @@ object Resources {
         val DON = Res.drawable.donald_isoe
 
         val KOTLIN = Res.drawable.kotlin
+        val DAVID_S_PUMPKINS = Res.drawable.david_s_pumpkins
     }
 }
