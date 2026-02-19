@@ -13,6 +13,7 @@ import androidx.compose.animation.slideInVertically
 import androidx.compose.animation.togetherWith
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -37,10 +38,13 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import io.github.donald_okara.components.frames.SkiFrame
 import io.github.donald_okara.components.values.Values
+import ke.don.demos.components.TimerComponent
 import ke.don.domain.NavDirection
 import ke.don.domain.Slide
 import ke.don.domain.ScreenTransition
 import ke.don.ski.navigation.ContainerState
+import kotlin.time.Duration.Companion.minutes
+import kotlin.time.Duration.Companion.seconds
 
 /**
  * Renders the presentation container with optional header and footer and animates slide changes.
@@ -59,7 +63,7 @@ fun MainContainer(
     frame: SkiFrame,
     mode: DeckMode,
     header: (@Composable () -> Unit)? = mainHeader(state, mode),
-    footer: (@Composable () -> Unit)? = mainFooter(state),
+    footer: (@Composable () -> Unit)? = mainFooter(state, mode == DeckMode.Local),
     modifier: Modifier = Modifier,
     content: @Composable (Slide) -> Unit,
 ) {
@@ -94,50 +98,59 @@ fun MainContainer(
      * @param state The container state containing the current slide and navigation direction.
      * @return A composable lambda that renders the slide footer, or `null` if the current slide's footer is hidden.
      */
-    private fun mainFooter(state: ContainerState): @Composable (() -> Unit)? =
+    private fun mainFooter(state: ContainerState, showTimer: Boolean): @Composable (() -> Unit)? =
     if (state.slide.showFooter) {
         {
             Row(
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.spacedBy(8.dp),
                 modifier = Modifier
                     .animateContentSize()
-                    .background(
-                        MaterialTheme.colorScheme.surfaceVariant,
-                        RoundedCornerShape(Values.cornerRadius)
-                    )
-                    .padding(horizontal = 14.dp, vertical = 10.dp),
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                Box(
+            ){
+                if (showTimer) { TimerComponent(totalTime = 40.minutes) }
+
+                Row(
                     modifier = Modifier
-                        .size(8.dp)
-                        .clip(CircleShape)
+                        .animateContentSize()
                         .background(
-                            brush = Brush.verticalGradient(
-                                colors = listOf(
-                                    Color(0xFFFF6E40),
-                                    MaterialTheme.colorScheme.primary,
+                            MaterialTheme.colorScheme.surfaceVariant,
+                            RoundedCornerShape(Values.cornerRadius)
+                        )
+                        .padding(horizontal = 14.dp, vertical = 10.dp),
+                    verticalAlignment = Alignment.CenterVertically
+                ) {
+                    Box(
+                        modifier = Modifier
+                            .size(8.dp)
+                            .clip(CircleShape)
+                            .background(
+                                brush = Brush.verticalGradient(
+                                    colors = listOf(
+                                        Color(0xFFFF6E40),
+                                        MaterialTheme.colorScheme.primary,
+                                    )
                                 )
                             )
-                        )
-                )
-
-                Spacer(Modifier.width(10.dp))
-
-                AnimatedContent(
-                    targetState = state.slide.label,
-                    transitionSpec = {
-                        transitionFor(
-                            slide = state.slide,
-                            direction = state.direction
-                        )
-                    },
-                    label = "text-change"
-                ) { value ->
-                    Text(
-                        value,
-                        style = MaterialTheme.typography.bodyMedium,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
+
+                    Spacer(Modifier.width(10.dp))
+
+                    AnimatedContent(
+                        targetState = state.slide.label,
+                        transitionSpec = {
+                            transitionFor(
+                                slide = state.slide,
+                                direction = state.direction
+                            )
+                        },
+                        label = "text-change"
+                    ) { value ->
+                        Text(
+                            value,
+                            style = MaterialTheme.typography.bodyMedium,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant
+                        )
+                    }
                 }
             }
         }
