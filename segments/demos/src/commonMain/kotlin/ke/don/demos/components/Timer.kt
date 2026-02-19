@@ -126,6 +126,7 @@ fun TimerContent(
                 TimerStatus.Paused -> Icons.Outlined.PlayArrow
                 TimerStatus.Stopped -> Icons.Outlined.Stop
             },
+            tint = Color.White,
             contentDescription = null
         )
 
