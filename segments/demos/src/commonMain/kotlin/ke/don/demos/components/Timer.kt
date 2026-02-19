@@ -8,6 +8,12 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.Pause
+import androidx.compose.material.icons.outlined.PlayArrow
+import androidx.compose.material.icons.outlined.Stop
+import androidx.compose.material.icons.outlined.Timer
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.*
@@ -63,13 +69,11 @@ fun TimerComponent(
             .widthIn(min = 160.dp)
             .height(64.dp)
             .clip(RoundedCornerShape(Values.cornerRadius))
-            .background(MaterialTheme.colorScheme.surfaceVariant)
+            .background(Color.DarkGray)
             .clickable {
                 status = when (status) {
-                    TimerStatus.Idle -> TimerStatus.Resumed
-                    TimerStatus.Resumed -> TimerStatus.Paused
-                    TimerStatus.Paused -> TimerStatus.Resumed
-                    TimerStatus.Stopped -> TimerStatus.Idle
+                    TimerStatus.Idle, TimerStatus.Stopped, TimerStatus.Paused -> TimerStatus.Resumed
+                    else -> TimerStatus.Paused
                 }
                 if (status == TimerStatus.Resumed && timeLeft <= Duration.ZERO) {
                     timeLeft = totalTime
@@ -78,12 +82,13 @@ fun TimerComponent(
     ) {
         // Wavy vertical fill
         WavyVerticalProgress(
+            waveCount = 3,
             progress = animatedProgress,
             modifier = Modifier.matchParentSize(),
             colors = when {
                 (status == TimerStatus.Stopped) || (status == TimerStatus.Idle) || (status == TimerStatus.Paused) -> listOf(
                     Color.Transparent,
-                    Color.Transparent
+                    Color.DarkGray
                 )
 
                 timeLeft <= Duration.ZERO -> listOf(Color.Red, Color.Red)
@@ -114,12 +119,23 @@ fun TimerContent(
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.Center
     ) {
+        Icon(
+            imageVector = when (status) {
+                TimerStatus.Idle -> Icons.Outlined.Timer
+                TimerStatus.Resumed -> Icons.Outlined.Pause
+                TimerStatus.Paused -> Icons.Outlined.PlayArrow
+                TimerStatus.Stopped -> Icons.Outlined.Stop
+            },
+            contentDescription = null
+        )
+
+        Spacer(modifier = Modifier.width(10.dp))
+
         Text(
             text = when (status) {
                 TimerStatus.Idle -> "Start"
-                TimerStatus.Resumed -> formatTime(timeLeft.inWholeMilliseconds)
-                TimerStatus.Paused -> "Resume"
-                TimerStatus.Stopped -> "Reset"
+                TimerStatus.Resumed, TimerStatus.Paused -> formatTime(timeLeft.inWholeMilliseconds)
+                TimerStatus.Stopped -> "Restart"
             },
             style = MaterialTheme.typography.bodyMedium,
             color = Color.White,
@@ -137,15 +153,23 @@ fun WavyVerticalProgress(
     colors: List<Color> = listOf(Color(0xFFFF6E40), MaterialTheme.colorScheme.primary),
     waveAmplitude: Dp = 8.dp,
     waveFrequency: Float = 2f,
-    waveSpeed: Int = 1000
+    waveSpeed: Int = 1000,
+    waveCount: Int = 2 // number of overlapping waves
 ) {
     val infiniteTransition = rememberInfiniteTransition()
-    val waveOffset by infiniteTransition.animateFloat(
-        0f, 1f,
-        animationSpec = infiniteRepeatable(
-            animation = tween(waveSpeed, easing = LinearEasing)
+    val waveOffsets = List(waveCount) { index ->
+        infiniteTransition.animateFloat(
+            initialValue = 0f,
+            targetValue = 1f,
+            animationSpec = infiniteRepeatable(
+                animation = tween(
+                    durationMillis = waveSpeed + index * 300, // staggered speed
+                    easing = LinearEasing
+                ),
+                repeatMode = RepeatMode.Restart
+            )
         )
-    )
+    }
 
     Canvas(modifier = modifier.clip(RoundedCornerShape(cornerRadius))) {
         val widthPx = size.width
@@ -153,27 +177,32 @@ fun WavyVerticalProgress(
         val fillHeight = heightPx * progress
         val amplitudePx = waveAmplitude.toPx()
 
-        val path = Path().apply {
-            moveTo(0f, heightPx)
-            for (x in 0..widthPx.toInt()) {
-                val y = heightPx - fillHeight +
-                        amplitudePx * sin((x / widthPx) * waveFrequency * 2 * PI + waveOffset * 2 * PI).toFloat()
-                lineTo(x.toFloat(), y)
+        repeat(waveCount) { i ->
+            val path = Path().apply {
+                moveTo(0f, heightPx)
+                for (x in 0..widthPx.toInt()) {
+                    val phase = waveOffsets[i].value * 2 * PI
+                    val y = heightPx - fillHeight +
+                            amplitudePx * sin((x / widthPx) * waveFrequency * 2 * PI + phase).toFloat()
+                    lineTo(x.toFloat(), y)
+                }
+                lineTo(widthPx, heightPx)
+                close()
             }
-            lineTo(widthPx, heightPx)
-            close()
-        }
 
-        drawPath(
-            path = path,
-            brush = Brush.verticalGradient(
-                colors = colors,
-                startY = heightPx - fillHeight - amplitudePx,
-                endY = heightPx
+            // Slightly reduce alpha for overlapping effect
+            drawPath(
+                path = path,
+                brush = Brush.verticalGradient(
+                    colors = colors.map { it.copy(alpha = 0.5f) }, // half transparency
+                    startY = heightPx - fillHeight - amplitudePx,
+                    endY = heightPx
+                )
             )
-        )
+        }
     }
 }
+
 
 // Helper functions
 private fun formatTime(millis: Long): String {
