@@ -12,8 +12,12 @@ internal fun Project.configureKotlinMultiplatform(
     jvm()
 
     js {
-        browser()
-        binaries.executable()
+        browser {
+            binaries.executable()
+            commonWebpackConfig {
+                sourceMaps = false
+            }
+        }
     }
 
     listOf(
