@@ -1,5 +1,6 @@
 {
-  "buildCommand": "./gradlew :composeApp:jsBrowserProductionWebpack",
-  "outputDirectory": "composeApp/build/dist/js/productionExecutable",
+  "version": 2,
+  "buildCommand": "./gradlew :composeApp:wasmJsBrowserProductionWebpack",
+  "outputDirectory": "composeApp/build/kotlin-webpack/wasmJs/productionExecutable",
   "framework": null
 }
